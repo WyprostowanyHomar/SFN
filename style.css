@@ -1,0 +1,120 @@
+body { 
+  background-color:#DDD;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.options {
+  float       : left;
+  width       : 25%;
+  padding     : 10px;
+  min-height  : 100%;
+  background-color:#CEF6EC;
+  padding-top : 50px;
+}
+
+.main {
+  float       : left;
+  width       : 75%;
+  min-height  : 100%;
+  background-color:#A9E2F3;
+}
+
+.presentation:after {
+  content: "";
+  display: table;
+  clear  : both;
+}
+
+.hcenter {
+  display     : block;
+  margin-left : auto;
+  margin-right: auto;
+}
+
+.center {
+  display       : block;
+  margin-top    : auto;
+  margin-bottom : auto;
+  margin-left   : auto;
+  margin-right  : auto;
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px;
+  padding-left : 20px;
+  padding-right: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  margin-left   : auto;
+  margin-right  : auto;
+}
+
+.button:hover {
+  background-color: #FFFFFF; /* Green */ 
+  color: #4CAF50;
+}
+
+.switch {
+  background-color: #008CBA; /* Green */
+  border: none;
+  color: white;
+  padding: 10px;
+  padding-left : 20px;
+  padding-right: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.switch:hover {
+  background-color: #FFFFFF; /* Green */ 
+  color: #008CBA;
+}
+
+.slider {
+  -webkit-appearance: none;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  transition: 0.4s;
+}
+
+.slider:hover {
+  background: #FFFFFF;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.textInput {
+  font-size: 1.5em;
+  /*border: 1px solid black;*/
+}
+
+.text {
+  background: transparent;
+  border:none;
+  font-size: 1.5em;
+  font-weight:bold;
+}
