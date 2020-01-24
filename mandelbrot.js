@@ -10,7 +10,7 @@ Functions = ['c = Vec2(x, y)\nv = Vec2()\nfor(i = 0; i < N && QLen2(v) <= 4; i++
  'F = x + y',
  'F = x - y']
 
-F = TextInput(30, 10, Functions[0])
+F = TextInput(40, 10, Functions[0])
 
 HELP = Text('HELP')
 Options = [
@@ -24,9 +24,10 @@ Options = [
 
 State   = {}
 P = CreatePresentation(Options, Vec2(), 1)
+MakeCanvasGreatAgain(P.can)
 State.imagePos  = P.can.imagePos
 State.imageData = P.can.ctx.getImageData(0, 0, P.can.width, P.can.height)
-State.size = 64
+State.size = 60
 State.W    = CEIL(P.can.width  / State.size)
 State.H    = CEIL(P.can.height / State.size)
 State.N    = 100

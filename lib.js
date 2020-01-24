@@ -40,6 +40,7 @@ function CProduct (v, w) { return {x:v.x*w.x - v.y*w.y, y:v.x*w.y+v.y*w.x} }
 function QCProduct(v, w) { let x = v.x*w.x - v.y*w.y; v.y = v.x*w.y+v.y*w.x; v.x = x; return v }
 function SProduct (v, w) { return v.x*w.x + v.y*w.y }
 function VProduct (v, w) { return v.x*w.y-v.y*w.x }
+//function PlusProduct(v) {v = {x:ABS(v.x),y:ABS(v.y)}; return QCProduct(v,v)}
 
 function SMultiple (s, v){ return {x:v.x*s, y:v.y*s} }
 function QSMultiple(s, v){ v.x *= s; v.y *= s; return v }
@@ -171,6 +172,13 @@ function Canvas(width, height, origin, scale){
   }
   self.imagePos = function(vec){
     return QADD(QConjugate(QSMultiple(self.scale/self.size*2, QSUB(vec, Vec2(self.width/2, self.height/2)))), self.origin)
+  }
+  self.pixelPos = function(vec){
+	return QADD(Vec2(self.width/2, self.height/2),QConjugate(QSMultiple(self.size/self.scale/2, SUB(vec, self.origin)))) 
+  }
+  self.clear = function(color = QGray(255)){
+	  self.ctx.fillStyle = COLOR(color)
+	  self.ctx.fillRect(0,0, self.width, self.height)
   }
   return self
 }
@@ -345,6 +353,48 @@ function NGray(l){ return NRGB(l,l,l) }
 
 function ColorLerp(t, A, B){ return [LERP(t, A[0], B[0]), LERP(t, A[1], B[1]), LERP(t, A[2], B[2])] }
 
+function COLOR(C){ 
+  r = C[0].toString(16);
+  g = C[1].toString(16);
+  b = C[2].toString(16);
+
+  if (r.length == 1)
+    r = "0" + r;
+  if (g.length == 1)
+    g = "0" + g;
+  if (b.length == 1)
+    b = "0" + b;
+
+  return "#" + r + g + b;
+}
 //------------------------------------------------------------------------------
 
-
+function MakeCanvasGreatAgain(self){
+	self.LINE = function(A, B, color = QGray(0), w = 1){
+		self.ctx.beginPath()
+		X = self.pixelPos(A)
+		self.ctx.moveTo(X.x, X.y)
+		X = self.pixelPos(B)
+		self.ctx.lineTo(X.x, X.y)
+		self.ctx.lineWidth = (w / self.scale)
+		self.ctx.strokeStyle = COLOR(color)
+		self.ctx.stroke()
+	}
+	self.CIRCLE = function(A, r, color = QGray(0), w = 1, a0 = 0, a1 = 2 * Math.PI){
+		self.ctx.beginPath()
+		X = self.pixelPos(A)
+		self.ctx.arc(X.x, X.y, r / self.scale, a0, a1);
+		self.ctx.lineWidth = (w / self.scale)
+		self.ctx.strokeStyle = COLOR(color)
+		self.ctx.stroke()
+	}
+	self.BALL = function(A, r, color = QGray(0), a0 = 0, a1 = 2 * Math.PI){
+		self.ctx.beginPath()
+		X = self.pixelPos(A)
+		self.ctx.arc(X.x, X.y, r / self.scale, a0, a1);
+		self.ctx.fillStyle = COLOR(color)
+		self.ctx.fill()
+		//console.log(X, COLOR(color), r / self.scale, a0, a1)
+	}
+	return self
+}
